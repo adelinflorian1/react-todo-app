@@ -4,6 +4,7 @@ import './App.css';
 
 import List from './List'
 import API from "./fakeAPI";
+import ListController from "./ListController";
 
 class App extends Component {
 
@@ -20,12 +21,23 @@ class App extends Component {
         });
     }
 
+    addNewList = (title) => {
+
+        API.addList(title).then(()=>{
+            this.componentWillMount();
+        });
+    };
+
   render() {
       return <div className="App">
           <header className="App-header">
               <img src={logo} className="App-logo" alt="logo"/>
               <h1 className="App-title">Welcome to React</h1>
           </header>
+
+          <div>
+            Add List: <ListController addFunction={this.addNewList}/>
+          </div>
 
           {this.state.lists.map((list, i) =>
               <div className='listBody'>

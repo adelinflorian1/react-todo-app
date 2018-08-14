@@ -1,6 +1,7 @@
 import React from 'react'
 import Task from './Task'
 import TaskController from'./TaskController'
+import API from "./fakeAPI";
 class List extends React.Component{
     constructor(props){
         super(props);
@@ -10,15 +11,10 @@ class List extends React.Component{
     };
 
     addNewTask = (title) => {
-        const newTask = {
-            title: title,
-            checked: false,
-            text: 'New task soon'
-        };
-        const copy = this.state.lists;
-        console.log(this.state.lists);
-        copy.taskArray.push(newTask);
-        this.setState({list: copy});
+
+        API.addTask(this.state.lists.title,title,'New task soon').then(()=>{
+            this.setState({list: []});
+        });
     };
 
     render(){
